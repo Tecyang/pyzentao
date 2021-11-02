@@ -49,13 +49,14 @@ class Zentao:
         # check out params
         params = kwargs.pop("params", {})
         params[self.session.name] = self.session.id
-
+        data = kwargs.pop("data", {})
         api = self.apis.get(api_name, kwargs)
 
         response = requests.request(
             method=api.get("method", "GET"),
             url=api.get("url"),
-            params=params
+            params=params,
+            data=data
         ).json()
 
         # return raw data or not
